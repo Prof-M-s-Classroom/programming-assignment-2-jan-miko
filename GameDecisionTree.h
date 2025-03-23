@@ -22,18 +22,31 @@ public:
     void loadStoryFromFile(const std::string& filename, char delimiter) {
         cout << "loadStoryFromFile" << endl;
         ifstream MyFile(filename);
-        // check if is able to opem
+        // check if is able to open
         /*if (!MyFile.is_open()) {
             cout << "Error: Unable to open file " << filename << endl;
             return;
         } */
-        cout << "before loop" << endl;
-        string line;
+        string line, description, eventString, leftString, rightString;
+        int eventNum, leftNum, rightNum;
         while (getline(MyFile, line)) {
-            cout << line << endl;
-            cout << "looping" << endl;
+            stringstream ss(line); // use a stringstream as a buffer
+
+            // assume file is formatted correctly, get each chunk
+            getline(ss, eventString, delimiter); // read until delimiter
+            eventNum = stoi(eventString); // turn string to integer
+            cout<<"eventNum is "<<eventNum<<endl; // use cout statement to check
+
+            // description should be second followed by children
+            getline(ss, description, delimiter);
+            cout<<"description is "<<description<<endl;
+            getline(ss, leftString, delimiter);
+            leftNum = stoi(leftString);
+            cout<<"leftNum is "<<leftNum<<endl;
+            getline(ss, rightString, delimiter);
+            rightNum = stoi(rightString);
+            cout<<"rightNum is "<<rightNum<<endl;
         }
-        cout << "after loop" << endl;
         MyFile.close();
     }
 

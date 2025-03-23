@@ -22,10 +22,11 @@ public:
     void loadStoryFromFile(const std::string& filename, char delimiter) {
         cout << "loadStoryFromFile" << endl;
         ifstream MyFile(filename);
-        if (!MyFile.is_open()) {
+        // check if is able to opem
+        /*if (!MyFile.is_open()) {
             cout << "Error: Unable to open file " << filename << endl;
             return;
-        }
+        } */
         cout << "before loop" << endl;
         string line;
         while (getline(MyFile, line)) {

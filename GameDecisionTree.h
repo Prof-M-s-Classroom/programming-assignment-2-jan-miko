@@ -13,6 +13,11 @@ class GameDecisionTree {
 private:
     Node<T>* root;
 
+    // helper function to assign children properly
+    void assignChild(Node<T>* current, unordered_map<int, T> uo_map) {
+
+
+    }
 
 public:
     // TODO: Constructor
@@ -20,35 +25,49 @@ public:
 
     // TODO: Function to load story data from a text file and build the binary tree
     void loadStoryFromFile(const std::string& filename, char delimiter) {
-        cout << "loadStoryFromFile" << endl;
+        //opens filename as an input file stream
         ifstream MyFile(filename);
         // check if is able to open
-        /*if (!MyFile.is_open()) {
+        if (!MyFile.is_open()) {
             cout << "Error: Unable to open file " << filename << endl;
             return;
-        } */
+        }
+        //declare variables to be used within while loop
+        unordered_map<int, T> uo_map;
+
         string line, description, eventString, leftString, rightString;
         int eventNum, leftNum, rightNum;
+        int firstEvent =-1; // keeps track of first line in story text
+
+        //reads lines from file
         while (getline(MyFile, line)) {
             stringstream ss(line); // use a stringstream as a buffer
 
             // assume file is formatted correctly, get each chunk
             getline(ss, eventString, delimiter); // read until delimiter
             eventNum = stoi(eventString); // turn string to integer
-            cout<<"eventNum is "<<eventNum<<endl; // use cout statement to check
+            //cout<<"eventNum is "<<eventNum<<endl; // used cout statements to check
 
             // description should be second followed by children
-            getline(ss, description, delimiter);
-            cout<<"description is "<<description<<endl;
+            getline(ss, description, delimiter); //cout<<"description is "<<description<<endl;
             getline(ss, leftString, delimiter);
-            leftNum = stoi(leftString);
-            cout<<"leftNum is "<<leftNum<<endl;
+            leftNum = stoi(leftString); //cout<<"leftNum is "<<leftNum<<endl;
             getline(ss, rightString, delimiter);
-            rightNum = stoi(rightString);
-            cout<<"rightNum is "<<rightNum<<endl;
+            rightNum = stoi(rightString); //cout<<"rightNum is "<<rightNum<<endl;
+
+            //insert story into dictionary data structure O(1) access
+            uo_map[eventNum] = T(description, eventNum, leftNum, rightNum);
+
         }
         MyFile.close();
+        // build binary tree
+        T tempStory = uo_map[firstEvent];
+        Node<T>* tempNode = new Node<T>(tempStory);
+        root = tempNode;
+        assignChild(root, uo_map);
+
     }
+
 
     // TODO: Function to start the game and traverse the tree based on user input
     void playGame() {

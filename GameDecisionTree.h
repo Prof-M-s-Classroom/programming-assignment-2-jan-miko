@@ -13,9 +13,24 @@ class GameDecisionTree {
 private:
     Node<T>* root;
 
-    // helper function to assign children properly
+    // helper function to assign children properly, still creates duplicate nodes though
     void assignChild(Node<T>* current, unordered_map<int, T> uo_map) {
+        T tempStory = uo_map[current->data.eventNumber];
 
+        // assigns left child
+        if (tempStory.leftEventNumber != -1) {
+            T leftStory = uo_map[tempStory.leftEventNumber];
+            Node<T>* tempNode = new Node<T>(leftStory);
+            current->left = tempNode;
+            assignChild(current->left, uo_map);
+        }
+        // assigns right child
+        if (tempStory.rightEventNumber != -1) {
+            T rightStory = uo_map[tempStory.rightEventNumber];
+            Node<T>* tempNode = new Node<T>(rightStory);
+            current->right = tempNode;
+            assignChild(current->right, uo_map);
+        }
 
     }
 

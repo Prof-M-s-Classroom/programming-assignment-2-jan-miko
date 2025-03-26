@@ -1,14 +1,13 @@
 #ifndef GAMEDECISIONTREE_H
 #define GAMEDECISIONTREE_H
 
-#include <unordered_map>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <limits>
-
-#include "Node.h"
+#include <unordered_map> // Used as a dictionary to organize story objects
+#include <fstream> // Used to read lines from input file
+#include <sstream> // Used to parse lines
+#include <iostream> // Used to take user input and output game
+#include "Node.h" // Used to build binary tree
 #include "Story.h"
+#include <limits>
 
 template <typename T>
 class GameDecisionTree {

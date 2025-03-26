@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <limits>
+
 #include "Node.h"
 #include "Story.h"
 
@@ -87,7 +89,56 @@ public:
     // TODO: Function to start the game and traverse the tree based on user input
     void playGame() {
         cout << "playGame" << endl;
+
+        Node<T>* currNode = root;
+
+        while (currNode && (currNode->left || currNode->right)) {
+            cout << currNode->data.description << "Do you: "<< endl;
+            if (currNode->left)
+                cout << "1. " << currNode->left->data.description << "(go left)" << endl;
+            if (currNode->right)
+                cout << "2. " << currNode->right->data.description << "(go right)" << endl;
+            int choice;
+
+            // Following input validation adapted from https:/www.geeksforgeeks.org/how-to-use-cin-fail-method-in-cpp/
+            while (true) {
+                cout << "Enter choice: ";
+
+                //Read input from user
+                cin >> choice;
+
+                // Check if the input operation failed
+                if (cin.fail()) {
+
+                    // Clear the error flags on the input stream
+                    cin.clear();;
+
+                    // Leave the rest of the line
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    // Ask the user to enter a valid int number only
+                    cout << "Wrong input, please enter an integer: '1' or '2' \n";
+                }
+                else {
+                    break;
+
+                }
+            }
+            if (choice == 1) {
+                currNode = currNode->left;
+            }
+            else if (choice == 2) {
+                currNode = currNode->right;
+            }
+            else {
+                cout << "Please enter either '1' or '2'" << endl;
+            }
+        }
+        if (currNode)
+            cout << currNode->data.description << endl;
     }
 };
 
 #endif // GAMEDECISIONTREE_H
+
+

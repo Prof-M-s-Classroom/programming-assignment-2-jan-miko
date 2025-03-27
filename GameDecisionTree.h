@@ -6,100 +6,144 @@
 #include <sstream> // Used to parse lines
 #include <iostream> // Used to take user input and output game
 #include "Node.h" // Used to build binary tree
-#include "Story.h"
+#include "Story.h" // Used to organize parsed lines
 #include <limits>
 
+// Generic datatype
 template <typename T>
+
+// Underlying game data structure
 class GameDecisionTree {
+
+// Start of the binary tree
 private:
     Node<T>* root;
 
-    // helper function to assign children properly, still creates duplicate nodes though
-    void assignChild(Node<T>* current, unordered_map<int, T> uo_map) {
+    // Helper function to assign children properly
+    void assignChild(Node<T>* rootPtr, Node<T>* current, unordered_map<int, T> uo_map) {
         T tempStory = uo_map[current->data.eventNumber];
+       // cout << "Assigning for " << current->data.eventNumber << endl;
 
-        // assigns left child
+        // Assigns left child
         if (tempStory.leftEventNumber != -1) {
-            T leftStory = uo_map[tempStory.leftEventNumber];
-            Node<T>* tempNode = new Node<T>(leftStory);
-            current->left = tempNode;
-            assignChild(current->left, uo_map);
-        }
-        // assigns right child
-        if (tempStory.rightEventNumber != -1) {
-            T rightStory = uo_map[tempStory.rightEventNumber];
-            Node<T>* tempNode = new Node<T>(rightStory);
-            current->right = tempNode;
-            assignChild(current->right, uo_map);
-        }
+            bool leftMatchFound = true; // Assume true before running search
+            Node<T>* tempNode = searchTree(rootPtr, tempStory.leftEventNumber);
 
+            if (tempNode == nullptr) {
+                leftMatchFound = false;// Set to false since not found
+                T leftStory = uo_map[tempStory.leftEventNumber];
+                Node<T>* leftNode = new Node<T>(leftStory);
+                tempNode = leftNode;
+            }
+            current->left = tempNode;
+
+            if (current->left != nullptr && !leftMatchFound) { // Only assign children if necessary
+                assignChild(rootPtr, current->left, uo_map);
+            }
+        }
+        // Assigns right child
+        if (tempStory.rightEventNumber != -1) {
+            bool rightMatchFound = true; // Assume true before running search
+            Node<T>* tempNode = searchTree(rootPtr, tempStory.rightEventNumber);
+
+            if (tempNode == nullptr) {
+                rightMatchFound = false;// Set to false since not found
+                T rightStory = uo_map[tempStory.rightEventNumber];
+                Node<T>* rightNode = new Node<T>(rightStory);
+                tempNode = rightNode;
+            }
+            current->right = tempNode;
+
+            if (current->right != nullptr && !rightMatchFound) { // Only assign children if necessary
+                assignChild(rootPtr, current->right, uo_map);
+            }
+        }
     }
 
+        // Helper function to handle exception when nodes point to the same child
+        Node<T>* searchTree(Node<T>* tempNodePtr, int searchNum) {
+            Node<T>* searchNode = nullptr;
+
+            if (tempNodePtr != nullptr) {
+                if (tempNodePtr->data.eventNumber == searchNum) {
+                    searchNode = tempNodePtr;
+                }
+                else {
+                    searchNode = searchTree(tempNodePtr->right, searchNum);
+                }
+            }
+        return searchNode;
+        }
+
 public:
-    // TODO: Constructor
+    // Constructor: root always starts empty
     GameDecisionTree() : root(nullptr) {}
 
     // TODO: Function to load story data from a text file and build the binary tree
-    void loadStoryFromFile(const std::string& filename, char delimiter) {
-        //opens filename as an input file stream
+    void loadStoryFromFile(const std::string& filename, char delimiter) { // O(N^2)
+
+        // Opens filename as an input file stream
         ifstream MyFile(filename);
-        // check if is able to open
+
+        // Check if is able to open
         if (!MyFile.is_open()) {
             cout << "Error: Unable to open file " << filename << endl;
             return;
         }
-        //declare variables to be used within while loop
-        unordered_map<int, T> uo_map;
 
+        // Declare variables to be used within while loop
+        unordered_map<int, T> uo_map;
         string line, description, eventString, leftString, rightString;
         int eventNum, leftNum, rightNum;
-        int firstEvent =-1; // keeps track of first line in story text
+        int firstEvent =-1; // Keeps track of first line in story text
 
-        //reads lines from file
+        // Reads lines from file
         while (getline(MyFile, line)) {
-            stringstream ss(line); // use a stringstream as a buffer
+            stringstream ss(line); // Use a stringstream as a buffer
 
-            // assume file is formatted correctly, get each chunk
-            getline(ss, eventString, delimiter); // read until delimiter
-            eventNum = stoi(eventString); // turn string to integer
-            //cout<<"eventNum is "<<eventNum<<endl; // used cout statements to check
-
-            // description should be second followed by children
+            // Assume file is formatted correctly, get each chunk
+            getline(ss, eventString, delimiter); // Read until delimiter
+            eventNum = stoi(eventString); // Turn string to integer
+           // cout<<"eventNum is "<<eventNum<<endl; // used cout statements to check
+            if (firstEvent == -1) {
+                firstEvent = eventNum;
+            }
+            // Description should be second followed by children
             getline(ss, description, delimiter); //cout<<"description is "<<description<<endl;
             getline(ss, leftString, delimiter);
             leftNum = stoi(leftString); //cout<<"leftNum is "<<leftNum<<endl;
             getline(ss, rightString, delimiter);
             rightNum = stoi(rightString); //cout<<"rightNum is "<<rightNum<<endl;
 
-            //insert story into dictionary data structure O(1) access
+            // Insert story into dictionary data structure O(1) access
             uo_map[eventNum] = T(description, eventNum, leftNum, rightNum);
-
         }
+
+        // Closes filename file
         MyFile.close();
-        // build binary tree
+
+        // Build binary tree
         T tempStory = uo_map[firstEvent];
         Node<T>* tempNode = new Node<T>(tempStory);
         root = tempNode;
-        assignChild(root, uo_map);
+        assignChild(root, root, uo_map);
 
     }
 
 
     // TODO: Function to start the game and traverse the tree based on user input
     void playGame() {
-        cout << "playGame" << endl;
-
         Node<T>* currNode = root;
 
         while (currNode && (currNode->left || currNode->right)) {
-            cout << currNode->data.description << "Do you: "<< endl;
-            if (currNode->left)
-                cout << "1. " << currNode->left->data.description << "(go left)" << endl;
+            cout << currNode->data.description << endl;
+          /*  if (currNode->left)
+               // cout << "1. " << currNode->left->data.description << "(go left)" << endl;
             if (currNode->right)
-                cout << "2. " << currNode->right->data.description << "(go right)" << endl;
+              //  cout << "2. " << currNode->right->data.description << "(go right)" << endl; */
             int choice;
 
-            // Following input validation adapted from https:/www.geeksforgeeks.org/how-to-use-cin-fail-method-in-cpp/
+            // Following input validation adapted from https://www.geeksforgeeks.org/how-to-use-cin-fail-method-in-cpp/
             while (true) {
                 cout << "Enter choice: ";
 
@@ -135,9 +179,8 @@ public:
         }
         if (currNode)
             cout << currNode->data.description << endl;
+        cout << "GAME OVER" << endl;
     }
 };
 
 #endif // GAMEDECISIONTREE_H
-
-

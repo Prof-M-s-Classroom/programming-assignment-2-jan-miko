@@ -1,16 +1,6 @@
-1 | You're walking to your car after losing money at a casino. A stranger approaches you with a question. Would you Option 1: play a game for a chest of good fortune or Option 2: take a mystery gift box without stopping to play. | 2 | 3
-2 | You choose to play the game and you're asked to choose between two chests: option 1: one made of gold. option 2: one made of jade. | 4|5
-3 | You take the mystery gift box and open it in your car. Inside there is a coin and a note.
-The note reads "Flip Me: heads you get a wish granted, tails you spin a magic wheel."
-Option 1: You think it's silly but flip the coin which lands heads. You wish for a chest of good fortune. | 4
-Option 2: You think this the box is a prank and toss the coin and note out the window.
-The coin falls on the street but lands on tails. | 6
-4 | You got the gold chest. It bursts open, revealing not cash but a glowing map that leads to a secret
- vault. A timer appears: You have 1 hour to find the vault or lose everything.
- Option 1: Immediately follow the map. Option 2: You try to sell the map. | -1 | -1
-5 | You pick the jade chest. Inside is a deck of silver cards. The stranger says, "Draw a card, your fortune
-depends on it."
-Option 1: Draw now. Option 2: Demand something else.| 7 | -1
-6 | A magic wheel appears in front of your car with a sign that says spin me.
- Option 1: You get out of your car and spin the wheel.
- Option 2: You get startled and just drive around it. | -1
+1 | You wake up in a forest clearing. There are two paths. | 2 | 3
+2 | You follow the path to the left and encounter a river. | 4 | 5
+3 | You go right and find an old cabin. | 5 | 6
+4 | You swim across the river and find a treasure chest. | -1 | -1
+5 | You find a hidden passageway that leads to a secret room. | 7 | -1
+6 | The cabin is empty. You find a trapdoor leading downwards. | -1 | -1

@@ -6,7 +6,7 @@
 6 | A magic wheel appears in front of your car with a sign that says spin me. (1) You get out of your car and spin the wheel. OR (2) You get startled and just drive around it to go home. | 9 | -1
 7 | You're about to draw a card. (1) Pick from the left of the deck OR (2) Pick from the middle of the deck| 14 | 15
 8 | The stranger says okay and gives you cash the same amount that you lost at the casino. (1) Go back inside the casino? OR (2) Go home? | 12 | 13
-9 | Spun the wheel, it landed on $10,000. You receive a text message that says keep the $10K or spin again for a chance to double it/maybe get the jackpot (1) You spin again. (2) You text keep the $10K. | 17 | 18
+9 | Spun the wheel, it landed on $10,000. You receive text messages that asks if you want to keep the $10K or spin again for a chance to double it/maybe get the jackpot (1) You spin again. (2) You text keep the $10K. | 17 | 18
 10 |Followed map to a treasure room where the stranger says congrats this is all for you. Good job. | -1 | -1
 11 | The bystander buys it for twice the amount you had lost at the casino. (1) Go back to the casino? OR (2) Go home satisfied that you doubled your money and didn't go home empty-handed. | 12 | 13
 12 | Unfortunately you lost the same amount of money again at casino. | -1 | -1

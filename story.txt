@@ -1,10 +1,18 @@
 1 | You're walking to your car after losing money at a casino. A stranger approaches you with an unexpected question. Would you (1) play a game for a chest of good fortune OR (2) take a mystery gift box without stopping to play. | 2 | 3
 2 | You choose to play the game and you're asked to choose between 2 chests: (1) one made of gold OR (2) one made of jade. | 4 | 5
-3 | You take the mystery gift box and open it in your car. Inside there is a coin and a note. --The note reads "Flip Me: heads you get a wish granted, tails you spin a magic wheel." (1) You think it's silly but flip the coin which lands heads. You wish for a chest of good fortune. OR (2) You think this the box is a prank and toss the coin and note out the window. The coin falls on the street but lands on tails. | 4 | 6
-4 | You got the gold chest. It bursts open, revealing not cash but a glowing map that leads to a secret vault. A timer appears: You have 1 hour to find the vault or lose everything. (1) Immediately follow the map. OR (2) You sell the map. | 10 | -1
-5 | You pick the jade chest. Inside is a deck of silver cards. The stranger says, "Draw a card, your fortune depends on it." (1) Draw now OR (2) Demand something else.| 7 | 8
-6 | A magic wheel appears in front of your car with a sign that says spin me. (1) You get out of your car and spin the wheel. OR (2) You get startled and just drive around it. | 9 | -1
-7 | Drew a card. Done. | -1 | -1
-8 | Got money instead. Done. | -1 | -1
-9 | Spun the wheel, Jackpot! Done. | -1 |-1
-10 |Followed map to treasure. Good job. | -1 | -1
+3 | You take the mystery gift box and open it in your car. Inside there is a coin and a note. -The note reads "Flip Me: heads you get a wish granted, tails you spin a magic wheel." (1) You think it's silly but flip the coin which lands heads. You wish for the chest of good fortune. OR (2) You think this the box is a prank and toss both the coin & the note out the window. The coin falls on the street but lands on tails. | 4 | 6
+4 | You got the gold chest. It bursts open, revealing not cash but a glowing map that leads to a secret vault A timer appears: You have 12 hours to find the vault or lose the chance for more money. (1) Immediately follow the map. OR (2) You sell the map to a bystander. | 10 | 11
+5 | You pick the jade chest. Inside is a deck of silver cards. The stranger says, "Draw a card, your fortune depends on it." (1) Draw now OR (2) Ask if there's anything else you can do instead. | 7 | 8
+6 | A magic wheel appears in front of your car with a sign that says spin me. (1) You get out of your car and spin the wheel. OR (2) You get startled and just drive around it to go home. | 9 | -1
+7 | You're about to draw a card. (1) Pick from the left of the deck OR (2) Pick from the middle of the deck| 14 | 15
+8 | The stranger says okay and gives you cash the same amount that you lost at the casino. (1) Go back inside the casino? OR (2) Go home? | 12 | 13
+9 | Spun the wheel, it landed on $10,000. You receive a text message that says keep the $10K or spin again for a chance to double it/maybe get the jackpot (1) You spin again. (2) You text keep the $10K. | 17 | 18
+10 |Followed map to a treasure room where the stranger says congrats this is all for you. Good job. | -1 | -1
+11 | The bystander buys it for twice the amount you had lost at the casino. (1) Go back to the casino? OR (2) Go home satisfied that you doubled your money and didn't go home empty-handed. | 12 | 13
+12 | Unfortunately you lost the same amount of money again at casino. | -1 | -1
+13 | You make it home safely, happy that you're not at a loss after a strange night out. | -1 | -1
+14 | You pull a joker card. You wake up and it was all a dream but it's the morning of the day you planned to go to a casino (1) Bring a close friend. (2) Go by yourself. | 16 | -1
+15 | You pull the Ace of Diamonds and the stranger smiles and gives you a suitcase full of diamonds worth one million dollars | -1 | -1
+16| You and your friend each win a $500,000 jackpot!. Congrats! | -1 | -1
+17 | You land on negative $10,000 and lose the money you would've had from the 1st spin. | -1 | -1
+18 | You won $10,000 which was way more than you had lost at the casino. | -1 | -1
